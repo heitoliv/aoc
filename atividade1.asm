@@ -7,39 +7,40 @@
 
 ORG 100h    
 
-LEA DX, input
+LEA DX, input  ;imprime input
 MOV AH, 09h
-int 21h
-                
+INT 21h
+
+;le e converte ASCII pra numero  EX:2024              
 MOV AH, 01h
 INT 21h 
-SUB AL, '0'  
+SUB AL, '0' ;2 
 MOV BL, AL  
 MOV AL, BL
-MOV AH, 10
-MUL AH
+MOV AH, 10  
+MUL AH      ;20
 
 MOV AH, 01h
 INT 21h
-SUB AL, '0'
+SUB AL, '0' ;0
 MOV BH, AL   
-ADD AL, BH
+ADD AL, BH  ;2
 MOV AH, 10
-MUL AH
+MUL AH      ;200
 
 MOV AH, 01h
 INT 21h
-SUB AL, '0'
+SUB AL, '0' ;2
 MOV CL, AL  
-ADD AL, CL
+ADD AL, CL  ;202
 MOV AH, 10
-MUL AH
+MUL AH      ;2020
 
 MOV AH, 01h
 INT 21h
-SUB AL, '0'
+SUB AL, '0' ;4
 MOV CH, AL  
-ADD AL, CH
+ADD AL, CH  ;2024
 MOV CX, AX  
 
 MOV AX, CX
