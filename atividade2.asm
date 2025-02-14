@@ -1,5 +1,9 @@
-org 100h
+;para Giraldeli,
+;no label racha(corrida) usamos JMP racha para fazer a repeticao, pois incrementando CX (as horas)
+;enquanto se usassemos LOOP ele iria decrementar CX.
 
+org 100h  
+ 
 LEA DX, iposX    ;le
 MOV AH, 09h      ;mensagem de
 INT 21h          ;iposX
@@ -66,7 +70,7 @@ LEA DX, carroY   ;exibe posicao do carro y
 MOV AH, 09h
 INT 21h
 MOV AX, [kmyAtual]     
-CALL printnum        
+CALL printnum       
 
 MOV AX, [kmxAtual] ;verifica se os carros
 CMP AX, [kmyAtual] ;se encontraram
@@ -113,6 +117,9 @@ lcFIM:
 MOV AX, CX         ;retorna numero convertido para AX
 RET 
 
+;nao usamos o PRINT_NUM do emu8086.inc, pois como e um
+;procedimento, o qual e avaliado na atividade 3, fizemos
+;uma label para essa funcao
 printnum:
 PUSH AX     ;pilha
 PUSH BX     ;pilha
@@ -158,6 +165,9 @@ MOV AH, 09h
 INT 21h
 MOV AX, [kmyAtual]
 CALL printnum
+MOV AH, 02h  ; :D
+MOV DL, 07h
+INT 21h
 
 fim:
 MOV AH, 4Ch
@@ -169,7 +179,6 @@ vx DW 0
 vy DW 0
 kmxAtual DW 0
 kmyAtual DW 0
-
 
 iposX       DB 13,10, 'Posicao do carro X: $'
 iposY       DB 13,10, 'Posicao do carro Y: $'
@@ -183,6 +192,5 @@ carroY      DB ' e Carro Y em $'
 printX      DB 13, 10, 'Carro X ultrapassou o carro Y na hora $'
 printY      DB 13, 10, 'Carro Y ultrapassou o carro X na hora $'
 depoisDE    DB ' apos o KM $'
-
 
 ret
